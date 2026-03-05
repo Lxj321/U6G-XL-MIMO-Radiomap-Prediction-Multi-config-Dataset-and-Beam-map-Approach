@@ -1,6 +1,9 @@
 # U6G XL-MIMO Radiomap Prediction: Multi-config Dataset & Beam Map Approach
 
-A benchmark dataset for **multi-configuration radiomap prediction** in **U6G / XL-MIMO** systems, featuring **800 scenes**, **multi-frequency**, **multi-antenna**, and **multi-beam** settings.
+A benchmark project for **multi-configuration radiomap prediction** in **U6G / XL-MIMO** systems, featuring **800 scenes**, **multi-frequency**, **multi-antenna**, and **multi-beam** settings.
+
+> **Preview mode:** This website is currently in a pre-release state.  
+> Public release of the dataset, code, pretrained models, and paper links will be announced later.
 
 [Dataset](dataset.md){ .md-button } [Quickstart](quickstart.md){ .md-button } [Benchmark](benchmark.md){ .md-button } [Pretrained](pretrained.md){ .md-button }
 
@@ -8,7 +11,7 @@ A benchmark dataset for **multi-configuration radiomap prediction** in **U6G / X
 
 ## Overview
 
-This project provides a benchmark for studying:
+This project is designed for studying:
 
 - **multi-configuration radiomap prediction**
 - **cross-configuration generalization**
@@ -16,17 +19,39 @@ This project provides a benchmark for studying:
 - **beam-aware radiomap modeling**
 - **sparse radiomap reconstruction**
 
-A key feature of this dataset is the joint release of:
+A key feature of this project is the joint design of:
 
 - **height maps**
 - **configuration-only beam maps**
 - **ray-tracing radiomap labels**
 - **optional mesh assets for ray-tracing reproduction**
-- **pretrained UNet and GAN baselines**
+- **UNet / GAN baseline pipelines**
 
 ---
 
-## What’s Included
+## Current Status
+
+The project website has been set up for documentation preview.
+
+At this stage:
+
+- dataset files are **not yet publicly released**
+- source code is **not yet publicly released**
+- pretrained checkpoints are **not yet publicly released**
+- the paper is **not yet submitted / publicly available**
+
+The current website is intended to:
+
+- preview the dataset structure
+- preview benchmark task definitions
+- preview pretrained model organization
+- help finalize documentation before public release
+
+---
+
+## What Will Be Released
+
+The planned public release will include:
 
 - **Dataset** (`Dataset/`)
   - height maps
@@ -56,49 +81,44 @@ A key feature of this dataset is the joint release of:
 
 ## Recommended Entry Points
 
-If you are new to this project, start with:
+If you are browsing this preview site, start with:
 
-- **Dataset** — understand the folder structure and naming rules
-- **Quickstart** — run pretrained evaluation
-- **Benchmark** — understand the 8 benchmark task settings
-- **Pretrained** — inspect available GAN / UNet checkpoints
+- **Dataset** — dataset structure and naming rules
+- **Benchmark** — task definitions and benchmark settings
+- **Pretrained** — planned pretrained model organization
+- **Quickstart** — preview of the intended evaluation workflow
+
+> Please note that some pages currently describe the **planned public structure** and may be refined before release.
 
 ---
 
-## Links
+## Planned Links
 
 - **Project Website:** this page
-- **Code Repository:** *(GitHub repo link can be added here)*
-- **Dataset Download:** *(to be added)*
-- **Pretrained Models Download:** *(to be added)*
-- **Paper / Preprint:** *(to be added)*
+- **Code Repository:** coming soon
+- **Dataset Download:** coming soon
+- **Pretrained Models Download:** coming soon
+- **Paper / Preprint:** coming soon
 
 ---
 
-## Project Status
+## Future Updates
 
-This website is being finalized.
+Future public updates will include:
 
-The current release already includes:
-
-- dataset structure documentation
-- benchmark task definitions
-- pretrained model organization
-- quickstart instructions for evaluation
-
-Future updates will include:
-
-- detailed tensor shape / unit documentation
-- exact preprocessing conventions
-- refined UNet checkpoint-to-task mapping
-- dataset / model download links
+- dataset download links
+- pretrained model download links
+- code release
+- exact tensor shape / unit documentation
+- full preprocessing conventions
+- UNet checkpoint-to-task mapping
 - paper / citation details
 
 ---
 
 ## Citation
 
-If you use this project, please cite the corresponding paper.
+Citation information will be added after the paper metadata is finalized.
 
 ```bibtex
 @article{to_be_added,
@@ -107,16 +127,14 @@ If you use this project, please cite the corresponding paper.
   journal = {to be added},
   year    = {2026}
 }
-````
-
-> The final BibTeX entry will be updated after the paper metadata is finalized.
+```
 
 ---
 
 ## License
 
-* **Code:** released under the **MIT License**
-* **Dataset:** license information will be specified separately
+* **Code:** planned to be released under the **MIT License**
+* **Dataset:** dataset license will be specified separately at public release
 
 ---
 
