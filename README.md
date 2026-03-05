@@ -17,7 +17,7 @@ The project website documents the planned structure of the release, including:
 - pretrained model layout
 - intended evaluation workflow
 
-**Website:** *(add your GitHub Pages link here once available)*
+**Website:** *(https://lxj321.github.io/multiconfig-radiomap-dataset/)*
 
 ---
 
@@ -155,5 +155,3 @@ Citation information will be added after the paper metadata is finalized.
 
 **Xiaojie Li (李宵杰)**
 Email: `xiaojieli@seu.edu.cn/xiaojieli@nuaa.edu.cn`  
-如果你愿意，我下一条可以直接给你一版 **“预发布状态”的 `quickstart.md`**。
-```
