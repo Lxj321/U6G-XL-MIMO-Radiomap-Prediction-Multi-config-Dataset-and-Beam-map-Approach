@@ -326,7 +326,4 @@ Mesh assets are required **only if reproducing the ray-tracing pipeline**.
 
 They are **not required** for training or evaluating machine learning models using the provided radiomaps and height maps.
 
-```
 
-如果你愿意，我下一步可以按同样方式把 **`index.md`、`quickstart.md`、`benchmark.md`、`pretrained.md`** 也一次性整理成完整可复制的 Markdown 文件。
-```
