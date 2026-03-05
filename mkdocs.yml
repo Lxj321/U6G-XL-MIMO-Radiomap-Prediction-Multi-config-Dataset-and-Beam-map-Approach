@@ -1,0 +1,28 @@
+```yaml
+site_name: U6G XL-MIMO Radiomap Prediction Dataset
+site_description: Multi-configuration radiomap prediction dataset and pretrained baselines
+site_author: Lxj321
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+    - toc.follow
+
+nav:
+  - Home: index.md
+  - Dataset: dataset.md
+  - Quickstart: quickstart.md
+  - Benchmark: benchmark.md
+  - Pretrained Models: pretrained.md
+
+markdown_extensions:
+  - tables
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.details
