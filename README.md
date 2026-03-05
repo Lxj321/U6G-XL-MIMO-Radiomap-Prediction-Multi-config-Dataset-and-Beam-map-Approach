@@ -17,7 +17,7 @@ The project website documents the planned structure of the release, including:
 - pretrained model layout
 - intended evaluation workflow
 
-**Website:** *(https://lxj321.github.io/multiconfig-radiomap-dataset/)*
+**Website:** *https://lxj321.github.io/multiconfig-radiomap-dataset/*
 
 ---
 
