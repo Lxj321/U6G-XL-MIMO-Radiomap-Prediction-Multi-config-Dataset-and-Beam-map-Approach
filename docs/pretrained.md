@@ -21,7 +21,7 @@ Pretrained_Model/GAN/<task_id>/
   eval_results.json
   epoch_history.json
   batch_history.json
-````
+```
 
 ## Files
 
