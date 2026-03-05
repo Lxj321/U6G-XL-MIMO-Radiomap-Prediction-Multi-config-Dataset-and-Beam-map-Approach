@@ -1,7 +1,0 @@
-site_name: U6G XL-MIMO Radiomap Prediction Dataset
-
-theme:
-  name: material
-
-nav:
-  - Home: index.md
