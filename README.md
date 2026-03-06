@@ -1,89 +1,87 @@
+
 # U6G XL-MIMO Radiomap Prediction: Multi-config Dataset & Beam Map Approach
 
 A benchmark project for **multi-configuration radiomap prediction** in **U6G / XL-MIMO** systems.
 
-This repository is currently in **pre-release** status.
-
-> Public release of the dataset, source code, pretrained models, and paper links will be announced later.
-
----
-
-## Project Website
-
-The project website documents the planned structure of the release, including:
-
-- dataset organization
-- benchmark task definitions
-- pretrained model layout
-- intended evaluation workflow
-
-**Website:** *https://lxj321.github.io/multiconfig-radiomap-dataset/*
+> **Public release:** The dataset, pretrained models, source code, and project website are now publicly available.
+>
+> - **Dataset & Pretrained Models:** https://huggingface.co/datasets/lxj321/Multi-config-Radiomap-Dataset
+> - **Code Repository:** https://github.com/Lxj321/MulticonfigRadiomapDataset
+> - **Project Website:** https://lxj321.github.io/MulticonfigRadiomapDataset/
 
 ---
 
-## Preview Scope
+## Overview
 
-This repository currently serves as a **documentation preview** for the upcoming public release.
+This project is designed for studying:
 
-At this stage:
+- **multi-configuration radiomap prediction**
+- **cross-configuration generalization**
+- **cross-environment generalization**
+- **beam-aware radiomap modeling**
+- **sparse radiomap reconstruction**
 
-- dataset files are **not yet public**
-- source code is **not yet public**
-- pretrained weights are **not yet public**
-- the paper is **not yet public**
+A key feature of this project is the joint design of:
 
-The current contents are intended to help finalize:
-
-- documentation structure
-- benchmark naming
-- dataset layout
-- release organization
+- **height maps**
+- **configuration-aware beam maps**
+- **ray-tracing radiomap labels**
+- **optional mesh assets for ray-tracing reproduction**
+- **UNet / GAN baseline pipelines**
 
 ---
 
-## Planned Release Contents
+## Released Resources
 
-The planned public release will include:
+The current public release includes:
 
-### 1. Dataset (`Dataset/`)
+### 1. Dataset
 
-- `height_maps/`
-- `radiomaps/`
-- `beam_maps/`
-- `configs/`
-- `sionna_maps/` (optional)
+The released dataset includes resources for large-scale U6G / XL-MIMO radiomap prediction, including:
 
-### 2. Baselines
+- height maps
+- radiomaps
+- beam maps
+- configuration files
+- optional ray-tracing related assets
 
-- UNet training / evaluation scripts
-- GAN training / evaluation scripts
+### 2. Baseline Code
 
-### 3. Pretrained Models (`Pretrained_Model/`)
+This repository provides code for:
 
-- GAN checkpoints for 8 benchmark tasks
-- UNet checkpoints and visualizations
-
-### 4. Dataset Generation Pipeline
-
-- OSM download
-- Sionna scene generation
-- height map generation
-- ray-tracing radiomap generation
+- UNet training and evaluation
+- GAN training and evaluation
+- dataset loading and benchmark execution
+- dataset generation pipeline
 - beam map generation
+- radiomap generation and validation
+
+### 3. Pretrained Models
+
+Pretrained checkpoints for benchmark tasks are released in the Hugging Face repository.
+
+### 4. Documentation
+
+Detailed documentation is provided on the project website, including:
+
+- dataset structure
+- benchmark settings
+- quickstart instructions
+- pretrained model organization
 
 ---
 
 ## Quick Facts
 
-- Scenes: **800**
-- Frequencies: **1.8 / 2.6 / 3.5 / 4.9 / 6.7 GHz**
-- TX antennas: up to **1024 TR**
-- Beam counts: **1 / 8 / 16 / 64**
-- Beam pattern: **3GPP TR 38.901**
+- **Scenes:** 800
+- **Frequencies:** 1.8 / 2.6 / 3.5 / 4.9 / 6.7 GHz
+- **TX antennas:** up to 1024 TR
+- **Beam counts:** 1 / 8 / 16 / 64
+- **Beam pattern:** 3GPP TR 38.901
 
 ---
 
-## Planned Benchmark Tasks
+## Benchmark Tasks
 
 The benchmark uses a unified task naming scheme:
 
@@ -104,34 +102,42 @@ These tasks cover variations in:
 
 ---
 
-## Documentation Pages
+## Repository Structure
 
-The website documentation is organized as:
+This repository includes code and documentation related to:
 
-- **Dataset** — folder structure and naming rules
-- **Quickstart** — intended evaluation workflow
-- **Benchmark** — task definitions
-- **Pretrained** — planned pretrained checkpoint organization
+- dataset generation
+- model training
+- model evaluation
+- project documentation
+
+Representative files include:
+
+- `DatasetGeneration_Step1_OSMDownload.py`
+- `DatasetGeneration_Step2_OSMToSionna.py`
+- `DatasetGeneration_Step3_OSMToHeightMap.py`
+- `DatasetGeneration_Step4_RadiomapRT.py`
+- `DatasetGeneration_Step5_RadiomapValidation.py`
+- `DatasetGeneration_Step6_BeammapGeneration.py`
+- `ModelTraining_GAN.py`
+- `ModelTraining_Unet.py`
+- `ModelEvaluation_GAN.py`
+- `ModelEvaluation_Unet.py`
 
 ---
 
-## Release Status
+## Getting Started
 
-This project is currently under preparation.
+For dataset download, pretrained models, and detailed documentation, please refer to:
 
-Planned next steps include:
-
-- finalizing documentation
-- preparing code cleanup
-- preparing dataset packaging
-- preparing pretrained model packaging
-- finalizing paper submission
+- **Hugging Face:** https://huggingface.co/datasets/lxj321/Multi-config-Radiomap-Dataset
+- **Project Website:** https://lxj321.github.io/MulticonfigRadiomapDataset/
 
 ---
 
 ## Citation
 
-Citation information will be added after the paper metadata is finalized.
+If you use this project, please cite the corresponding paper or project page.
 
 ```bibtex
 @article{to_be_added,
@@ -140,18 +146,20 @@ Citation information will be added after the paper metadata is finalized.
   journal = {to be added},
   year    = {2026}
 }
-````
+```
+
+Formal citation information will be updated after the paper metadata is finalized.
 
 ---
 
 ## License
 
-* **Code:** planned to be released under the **MIT License**
-* **Dataset:** dataset license will be specified separately upon public release
+* **Code:** MIT License
+* **Dataset / Pretrained Models:** see the Hugging Face repository for the corresponding release license
 
 ---
 
 ## Contact
 
 **Xiaojie Li (李宵杰)**
-Email: `xiaojieli@seu.edu.cn/xiaojieli@nuaa.edu.cn`  
+Email: `xiaojieli@seu.edu.cn` / `xiaojieli@nuaa.edu.cn`
