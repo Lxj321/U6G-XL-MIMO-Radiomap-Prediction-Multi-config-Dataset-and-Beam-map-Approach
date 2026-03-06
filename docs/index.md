@@ -2,10 +2,14 @@
 
 A benchmark project for **multi-configuration radiomap prediction** in **U6G / XL-MIMO** systems, featuring **800 scenes**, **multi-frequency**, **multi-antenna**, and **multi-beam** settings.
 
-> **Preview mode:** This website is currently in a pre-release state.  
-> Public release of the dataset, code, pretrained models, and paper links will be announced later.
+> **Public release:** The complete dataset, pretrained models, and code are now publicly available.
+>
+> - **Dataset & Pretrained Models (Hugging Face):** https://huggingface.co/datasets/lxj321/Multi-config-Radiomap-Dataset
+> - **Code Repository (GitHub):** https://github.com/Lxj321/MulticonfigRadiomapDataset
+> - **Project Website:** https://lxj321.github.io/MulticonfigRadiomapDataset/
 
 [Dataset](dataset.md) [Quickstart](quickstart.md) [Benchmark](benchmark.md) [Pretrained](pretrained.md)
+
 
 ---
 
@@ -29,16 +33,6 @@ A key feature of this project is the joint design of:
 
 ---
 
-## Current Status
-
-The project website has been set up for documentation preview.
-
-At this stage:
-
-- dataset files are **not yet publicly released**
-- source code is **not yet publicly released**
-- pretrained checkpoints are **not yet publicly released**
-- the paper is **not yet submitted / publicly available**
 
 The current website is intended to:
 
@@ -49,9 +43,9 @@ The current website is intended to:
 
 ---
 
-## What Will Be Released
+## What Is Included
 
-The planned public release will include:
+The current public release includes:
 
 - **Dataset** (`Dataset/`)
   - height maps
@@ -62,8 +56,8 @@ The planned public release will include:
   - UNet training / evaluation scripts
   - GAN training / evaluation scripts
 - **Pretrained models** (`Pretrained_Model/`)
-  - GAN checkpoints for 8 benchmark tasks
-  - UNet checkpoints and visualizations
+  - GAN checkpoints for benchmark tasks
+  - UNet checkpoints and related evaluation resources
 - **Dataset generation pipeline**
   - OSM → Sionna meshes → height maps → ray-tracing radiomaps → beam maps
 
@@ -92,27 +86,22 @@ If you are browsing this preview site, start with:
 
 ---
 
-## Planned Links
+## Links
 
-- **Project Website:** this page
-- **Code Repository:** coming soon
-- **Dataset Download:** coming soon
-- **Pretrained Models Download:** coming soon
-- **Paper / Preprint:** coming soon
-
+- **Project Website:** https://lxj321.github.io/MulticonfigRadiomapDataset/
+- **Code Repository:** https://github.com/Lxj321/MulticonfigRadiomapDataset
+- **Dataset & Pretrained Models:** https://huggingface.co/datasets/lxj321/Multi-config-Radiomap-Dataset
+- **Paper/Preprint:** coming soon
 ---
 
 ## Future Updates
 
-Future public updates will include:
+Future updates may include:
 
-- dataset download links
-- pretrained model download links
-- code release
-- exact tensor shape / unit documentation
-- full preprocessing conventions
-- UNet checkpoint-to-task mapping
-- paper / citation details
+- paper / citation metadata
+- refined tensor shape and unit documentation
+- additional benchmark examples
+- more detailed checkpoint-to-task mapping
 
 ---
 
@@ -133,8 +122,8 @@ Citation information will be added after the paper metadata is finalized.
 
 ## License
 
-* **Code:** planned to be released under the **MIT License**
-* **Dataset:** dataset license will be specified separately at public release
+* **Code:** **MIT License**
+* **Dataset:** **CC-BY-4.0 License**
 
 ---
 
