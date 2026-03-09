@@ -106,6 +106,34 @@ For detailed usage instructions and benchmark documentation, please refer to the
 
 ---
 
+## Core Dependencies
+
+The released repository spans multiple workflows, and different parts of the codebase rely on different environments.
+
+### For evaluation and baseline training
+The released UNet / GAN training and evaluation scripts primarily rely on standard Python ML packages such as:
+- `PyTorch`
+- `NumPy`
+- `Pandas`
+- `Matplotlib`
+- `scikit-image`
+
+### For ray-tracing radiomap generation
+The radiomap generation pipeline (`DatasetGeneration_Step4_RadiomapRT.py`) relies on:
+- `TensorFlow`
+- `Sionna 0.19.2`
+
+### For scene construction from OSM
+The scene-conversion step (`DatasetGeneration_Step2_OSMToSionna.py`) relies on:
+- `Blender 4.0`
+- `bpy` (Blender Python environment)
+
+### Important note
+Users who only want to evaluate the released pretrained checkpoints do **not** need to install the full dataset-generation environment.  
+The `Sionna 0.19.2` and `Blender 4.0 + bpy` dependencies are mainly required for reproducing the released data-generation pipeline.
+
+---
+
 ## Citation
 
 If you use this project in your research, please cite:
