@@ -1,18 +1,20 @@
-# Benchmark & Tasks
+# Benchmark and Tasks
 
-This project uses a **unified task naming scheme** aligned with the pretrained GAN folder names.
+This project defines a unified benchmark for **multi-configuration radiomap prediction** in **U6G / XL-MIMO** systems.
 
 The benchmark is designed to evaluate model performance under different:
 
 - **split strategies**
-- **sampling densities**
+- **supervision densities**
 - **input modes**
+
+A unified task naming scheme is used consistently across the released benchmark documentation, preprocessing pipelines, evaluation scripts, and pretrained GAN task folders.
 
 ---
 
-# Task List
+# Supported Tasks
 
-The currently supported benchmark tasks are:
+The released benchmark currently includes the following task IDs:
 
 - `random_dense_feature`
 - `random_dense_encoding`
@@ -25,126 +27,124 @@ The currently supported benchmark tasks are:
 
 These task IDs are used consistently in:
 
-- pretrained GAN folders (`Pretrained_Model/GAN/<task_id>/`)
-- evaluation scripts
 - benchmark documentation
+- preprocessing and evaluation pipelines
+- pretrained GAN folders such as `Pretrained_Model/GAN/<task_id>/`
 
 ---
 
 # Task Naming Rule
 
-Each task name follows the structure
+Each task ID follows the structure:
 
-```text
+```text id="lmow0e"
 <split>_<density>_<input_mode>
 ```
 
-or, for sparse tasks,
+or, for sparse tasks:
 
-```text
+```text id="8m0k38"
 <split>_<density>_<input_mode>_samples<N>
 ```
 
 where:
 
-* `<split>` specifies the dataset split strategy
-* `<density>` specifies whether the supervision is dense or sparse
-* `<input_mode>` specifies the input representation
-* `samples<N>` specifies the number of sampled observations used in sparse settings
+* `<split>` defines the dataset split strategy
+* `<density>` defines whether the task is dense or sparse
+* `<input_mode>` defines the input representation
+* `samples<N>` defines the number of sampled observations in sparse settings
 
 ---
 
 # Benchmark Dimensions
 
-## 1. Split Strategy
+## 1. Split strategy
 
-The split strategy defines **how training / validation / test sets are separated**.
+The split strategy defines how the training / validation / test sets are separated.
 
 ### `random`
 
-Random split over samples.
+Random split over all available samples.
 
-* Standard baseline setting
-* Measures generalization under randomly mixed training/testing conditions
+* standard baseline setting
+* evaluates generalization under randomly mixed train/test conditions
 
 ### `beam`
 
 Split by beam / configuration dimension.
 
-* Evaluates **cross-beam** or **cross-configuration** generalization
-* Harder than random split because the model must generalize across different beam conditions
+* evaluates **cross-beam** or **cross-configuration** generalization
+* harder than random split because the model must generalize across different beam conditions
 
 ### `scene`
 
 Split by scene ID (`u1..u800`).
 
-* Evaluates **cross-environment** generalization
-* Tests whether a model trained on one set of environments can generalize to unseen scenes
+* evaluates **cross-environment** generalization
+* tests whether a model trained on one group of environments can generalize to unseen scenes
 
 ---
 
-## 2. Density
+## 2. Supervision density
 
-The density setting defines the supervision/input completeness.
+The density setting defines whether the task uses full or partial observation support.
 
 ### `dense`
 
 Dense setting uses full-grid information.
 
-* All available spatial labels or inputs are used
-* This is the standard full-information benchmark
+* all available spatial labels or inputs are used
+* serves as the standard full-information benchmark
 
 ### `sparse`
 
 Sparse setting uses only partial sampled observations.
 
-* The model must reconstruct or predict the full radiomap from sparse samples
-* In the current benchmark, sparse tasks include:
+* the model must reconstruct or predict the full radiomap from sparse samples
+* the released sparse benchmark currently includes:
 
   * `samples819`
 
 ---
 
-## 3. Input Mode
+## 3. Input mode
 
-The input mode defines how the model represents the input features.
+The input mode defines how transmitter / beam / configuration information is represented.
 
 ### `feature`
 
-Uses the **feature-map based input**.
+Uses a **feature-map-based** input representation.
 
-This typically refers to using explicitly constructed feature maps (e.g., beam-map related features) as model input.
+In the released benchmark, this refers to explicitly constructed configuration-aware feature maps, such as beam-map-related side information.
 
 ### `encoding`
 
-Uses the **encoding-based input**.
+Uses a **continuous-encoding-based** input representation.
 
-This typically refers to a more compact or alternative representation rather than the explicit feature map.
-
-> Exact tensor definitions depend on the preprocessing pipeline and corresponding model scripts.
+In the released benchmark, this refers to compact configuration channels constructed from normalized continuous parameters instead of explicit feature maps.
 
 ---
 
 # Task Table
 
-| Task ID                             | Split Strategy | Density | Input Mode | Notes                                           |
-| ----------------------------------- | -------------- | ------- | ---------- | ----------------------------------------------- |
-| `random_dense_feature`              | random         | dense   | feature    | Standard dense baseline                         |
-| `random_dense_encoding`             | random         | dense   | encoding   | Dense baseline with encoding input              |
-| `beam_dense_feature`                | beam           | dense   | feature    | Cross-beam / cross-configuration generalization |
-| `beam_dense_encoding`               | beam           | dense   | encoding   | Cross-beam generalization with encoding input   |
-| `scene_dense_feature`               | scene          | dense   | feature    | Cross-scene / cross-environment generalization  |
-| `scene_dense_encoding`              | scene          | dense   | encoding   | Cross-scene generalization with encoding input  |
-| `random_sparse_feature_samples819`  | random         | sparse  | feature    | Sparse reconstruction with 819 samples          |
-| `random_sparse_encoding_samples819` | random         | sparse  | encoding   | Sparse reconstruction with 819 samples          |
+| Task ID                             | Split Strategy | Density | Input Mode | Meaning                                             |
+| ----------------------------------- | -------------- | ------- | ---------- | --------------------------------------------------- |
+| `random_dense_feature`              | random         | dense   | feature    | standard dense baseline                             |
+| `random_dense_encoding`             | random         | dense   | encoding   | dense baseline with continuous encoding             |
+| `beam_dense_feature`                | beam           | dense   | feature    | cross-beam / cross-configuration generalization     |
+| `beam_dense_encoding`               | beam           | dense   | encoding   | cross-beam generalization with continuous encoding  |
+| `scene_dense_feature`               | scene          | dense   | feature    | cross-scene / cross-environment generalization      |
+| `scene_dense_encoding`              | scene          | dense   | encoding   | cross-scene generalization with continuous encoding |
+| `random_sparse_feature_samples819`  | random         | sparse  | feature    | sparse reconstruction with 819 sampled observations |
+| `random_sparse_encoding_samples819` | random         | sparse  | encoding   | sparse reconstruction with 819 sampled observations |
 
 ---
 
 # Sparse Setting: `samples819`
 
-The suffix `samples819` indicates that the sparse setting uses:
+The suffix `samples819` indicates that each sparse sample uses:
 
-* **819 sampled observations** per example
+* **819 sampled observations**
 
 This setting is intended to evaluate:
 
@@ -152,59 +152,71 @@ This setting is intended to evaluate:
 * limited-measurement prediction
 * robustness under reduced observation availability
 
-> The exact sampling pattern (random mask / fixed mask / structured sampling) should be documented in the data preprocessing or evaluation scripts.
+In the released preprocessing pipelines, sparse samples are generated only over valid propagation regions, and the sparse observation mask is returned separately before being injected into the final model input.
 
 ---
 
-# Relation to Pretrained Models
+# Relation to Released Baselines and Pretrained Models
 
-The benchmark task names are directly aligned with the pretrained GAN directory structure:
+The benchmark task naming is directly aligned with the released GAN pretrained-model folder structure:
 
-```text
+```text id="7q1rq4"
 Pretrained_Model/GAN/<task_id>/
 ```
 
-For example:
+Examples:
 
-```text
+```text id="tkc5i4"
 Pretrained_Model/GAN/random_dense_feature/
 Pretrained_Model/GAN/scene_dense_encoding/
 Pretrained_Model/GAN/random_sparse_feature_samples819/
 ```
 
-This allows users to directly map:
+This alignment allows users to directly map:
 
-* **benchmark task**
-* **pretrained checkpoint**
-* **evaluation setting**
+* benchmark task
+* pretrained checkpoint
+* evaluation setting
 
 without additional renaming.
 
----
-
-# Notes
-
-* The benchmark naming is currently standardized according to the **GAN pretrained model folders**.
-* UNet checkpoints may use different file naming conventions, and a mapping table should be provided separately in the pretrained model documentation.
-* Exact preprocessing behavior depends on:
-
-  * `multiconfig_dataset_prepcocess_GAN.py`
-  * `multiconfig_dataset_prepcocess_Unet.py`
+For UNet baselines, checkpoint filenames follow a different naming style, while the underlying benchmark settings remain the same.
 
 ---
 
-# Recommended Usage
+# Relation to Data Preparation
 
-For most users, the following tasks are recommended as starting points:
+The exact input tensors used by each baseline are defined in the preprocessing scripts:
+
+* `multiconfig_dataset_prepcocess_GAN.py`
+* `multiconfig_dataset_prepcocess_Unet.py`
+
+In particular:
+
+* `feature` tasks use feature-map-based inputs
+* `encoding` tasks use continuous-encoding-based inputs
+* `sparse` tasks return a sparse sampling mask first, and sparse observations are then constructed in the training / evaluation scripts
+
+---
+
+# Recommended Starting Tasks
+
+For first use, the following tasks are recommended:
 
 * `random_dense_feature` — simplest standard baseline
 * `scene_dense_feature` — strongest cross-environment generalization test
 * `random_sparse_feature_samples819` — sparse reconstruction benchmark
 
-These three tasks provide a good initial coverage of:
+Together, these three tasks provide a good initial coverage of:
 
 * standard prediction
 * generalization
 * sparse recovery
 
+---
 
+### `Which task should I use?`
+
+- want a standard baseline → `random_dense_feature`
+- want cross-environment evaluation → `scene_dense_feature`
+- want sparse reconstruction → `random_sparse_feature_samples819`
