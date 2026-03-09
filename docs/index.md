@@ -3,7 +3,7 @@
 A benchmark project for **multi-configuration radiomap prediction** in **U6G / XL-MIMO** systems, featuring **800 scenes**, **multi-frequency**, **multi-antenna**, and **multi-beam** settings.
 
 > **Public release:** The complete dataset, pretrained models, and code are now publicly available.
->
+> - **Paper:** https://arxiv.org/abs/2603.06401
 > - **Dataset & Pretrained Models (Hugging Face):** https://huggingface.co/datasets/lxj321/Multi-config-Radiomap-Dataset
 > - **Code Repository (GitHub):** https://github.com/Lxj321/MulticonfigRadiomapDataset
 > - **Project Website:** https://lxj321.github.io/MulticonfigRadiomapDataset/
@@ -110,11 +110,14 @@ Future updates may include:
 Citation information will be added after the paper metadata is finalized.
 
 ```bibtex
-@article{to_be_added,
-  title   = {U6G XL-MIMO Radiomap Prediction: Multi-config Dataset and Beam Map Approach},
-  author  = {Xiaojie Li and collaborators},
-  journal = {to be added},
-  year    = {2026}
+@misc{li2026u6gxlmimoradiomapprediction,
+      title={U6G XL-MIMO Radiomap Prediction: Multi-Config Dataset and Beam Map Approach}, 
+      author={Xiaojie Li and Yu Han and Zhizheng Lu and Shi Jin and Chao-Kai Wen},
+      year={2026},
+      eprint={2603.06401},
+      archivePrefix={arXiv},
+      primaryClass={eess.SP},
+      url={https://arxiv.org/abs/2603.06401}, 
 }
 ```
 
