@@ -1,114 +1,150 @@
-# U6G XL-MIMO Radiomap Prediction: Multi-config Dataset & Beam Map Approach
+## Title
 
-A benchmark project for **multi-configuration radiomap prediction** in **U6G / XL-MIMO** systems, featuring **800 scenes**, **multi-frequency**, **multi-antenna**, and **multi-beam** settings.
+**U6G XL-MIMO Radiomap Prediction: Multi-Config Dataset & Beam Map Approach**
 
-> **Public release:** The complete dataset, pretrained models, and code are now publicly available.
-> 
-> - **Paper:** https://arxiv.org/abs/2603.06401
-> - **Dataset & Pretrained Models (Hugging Face):** https://huggingface.co/datasets/lxj321/Multi-config-Radiomap-Dataset
-> - **Code Repository (GitHub):** https://github.com/Lxj321/MulticonfigRadiomapDataset
-> - **Project Website:** https://lxj321.github.io/MulticonfigRadiomapDataset/
+## Subtitle
 
-[Dataset](dataset.md) [Quickstart](quickstart.md) [Benchmark](benchmark.md) [Pretrained](pretrained.md)
+**A public benchmark and reproducibility package for multi-configuration radiomap prediction in U6G / XL-MIMO systems.**
 
+## Intro paragraph
+
+This website serves as the documentation portal for the public release accompanying our paper **“U6G XL-MIMO Radiomap Prediction: Multi-Config Dataset and Beam Map Approach.”** It organizes the released dataset, benchmark definitions, pretrained models, and code for dataset generation, training, and evaluation.
+
+## Quick links / hero buttons
+
+
+* **Paper (arXiv)** https://arxiv.org/abs/2603.06401
+* **Dataset & Pretrained Models (Hugging Face)** https://huggingface.co/datasets/lxj321/Multi-config-Radiomap-Dataset
+* **Code (GitHub)** https://github.com/Lxj321/MulticonfigRadiomapDataset
+* **Documentation (Website)** https://lxj321.github.io/MulticonfigRadiomapDataset/
 
 ---
 
 ## Overview
 
-This project is designed for studying:
+Radiomap prediction is a fundamental capability for future wireless systems, especially in **U6G / XL-MIMO** scenarios where large arrays, multiple operating frequencies, and diverse transmitter configurations introduce strong variation across deployment conditions. To support reproducible research in this setting, this project provides a **multi-configuration radiomap benchmark** with unified task definitions, released data assets, pretrained checkpoints, and open-source code.
 
-- **multi-configuration radiomap prediction**
-- **cross-configuration generalization**
-- **cross-environment generalization**
-- **beam-aware radiomap modeling**
-- **sparse radiomap reconstruction**
+The benchmark is designed to study practical prediction settings including:
 
-A key feature of this project is the joint design of:
+* radiomap estimation without field measurements
+* sparse-input radiomap reconstruction
+* generalization across unseen transmitter configurations
+* transfer across unseen environments
 
-- **height maps**
-- **configuration-only beam maps**
-- **ray-tracing radiomap labels**
-- **optional mesh assets for ray-tracing reproduction**
-- **UNet / GAN baseline pipelines**
+By releasing both the benchmark resources and the end-to-end reproducibility pipeline, this project aims to support fair comparison, transparent evaluation, and follow-up research on radiomap learning for next-generation wireless systems.
 
 ---
 
+## Released Resources
 
-The current website is intended to:
+The public release includes:
 
-- preview the dataset structure
-- preview benchmark task definitions
-- preview pretrained model organization
-- help finalize documentation before public release
+* **Radiomaps** for all benchmarked transmitter configurations
+* **Height maps** for geometry-aware learning
+* **Beam maps** as configuration-dependent side information
+* **Configuration files** describing transmitter settings
+* **Ray-tracing scenes and simulation-related settings**
+* **Pretrained models** for the benchmark tasks
+* **Training and evaluation code**
+* **Dataset generation pipeline**
 
----
-
-## What Is Included
-
-The current public release includes:
-
-- **Dataset** (`Dataset/`)
-  - height maps
-  - radiomaps
-  - configuration-only beam maps
-  - optional mesh assets
-- **Baselines**
-  - UNet training / evaluation scripts
-  - GAN training / evaluation scripts
-- **Pretrained models** (`Pretrained_Model/`)
-  - GAN checkpoints for benchmark tasks
-  - UNet checkpoints and related evaluation resources
-- **Dataset generation pipeline**
-  - OSM → Sionna meshes → height maps → ray-tracing radiomaps → beam maps
+These resources are organized so that users can either directly evaluate released checkpoints, retrain models under the benchmark protocol, or inspect the full data-generation workflow.
 
 ---
 
-## Quick Facts
+## Reproducibility at a Glance
 
-- Scenes: **800** (`u1..u800`)
-- Frequencies: **1.8 / 2.6 / 3.5 / 4.9 / 6.7 GHz**
-- TX antennas: up to **1024 TR**
-- Beam counts: **1 / 8 / 16 / 64**
-- Beam pattern: **3GPP TR 38.901**
-
----
-
-## Recommended Entry Points
-
-If you are browsing this preview site, start with:
-
-- **Dataset** — dataset structure and naming rules
-- **Benchmark** — task definitions and benchmark settings
-- **Pretrained** — planned pretrained model organization
-- **Quickstart** — preview of the intended evaluation workflow
-
-> Please note that some pages currently describe the **planned public structure** and may be refined before release.
+| Resource          | Status | Access       |
+| ----------------- | ------ | ------------ |
+| Paper             | Public | arXiv        |
+| Dataset           | Public | Hugging Face |
+| Pretrained models | Public | Hugging Face |
+| Code              | Public | GitHub       |
+| Documentation     | Public | This website |
 
 ---
 
-## Links
+## Start Here
 
-- **Project Website:** https://lxj321.github.io/MulticonfigRadiomapDataset/
-- **Code Repository:** https://github.com/Lxj321/MulticonfigRadiomapDataset
-- **Dataset & Pretrained Models:** https://huggingface.co/datasets/lxj321/Multi-config-Radiomap-Dataset
-- **Paper/Preprint:** coming soon
+Depending on your purpose, the recommended entry points are:
+
+### Read the paper
+
+Use the paper to understand the problem formulation, benchmark motivation, beam map design, model settings, and main experimental results.
+
+### Inspect or download the dataset
+
+Use the Hugging Face repository to access the released dataset packages and pretrained models.
+
+### Run training or evaluation
+
+Use the GitHub repository for scripts related to training, evaluation, and dataset generation.
+
+### Understand the benchmark structure
+
+Use this website to navigate the task definitions, folder organization, naming conventions, and released resources.
+
 ---
 
-## Future Updates
+## Recommended Starting Paths
 
-Future updates may include:
+### Path A — Evaluate released checkpoints
 
-- paper / citation metadata
-- refined tensor shape and unit documentation
-- additional benchmark examples
-- more detailed checkpoint-to-task mapping
+Choose this path if you want to reproduce the reported benchmark performance as quickly as possible.
+
+1. Download the required dataset package
+2. Download the corresponding pretrained checkpoint
+3. Follow the evaluation instructions in the code repository
+
+### Path B — Retrain benchmark models
+
+Choose this path if you want to retrain the released models or build new baselines under the same benchmark protocol.
+
+1. Prepare the dataset according to the documented structure
+2. Select the target benchmark task
+3. Run the training pipeline from the code repository
+4. Evaluate the trained model on the designated test split
+
+### Path C — Regenerate data assets
+
+Choose this path if you want to inspect or reproduce the data-generation workflow.
+
+1. Prepare the released ray-tracing scenes and related assets
+2. Run the generation steps for height maps, radiomaps, and beam maps
+3. Organize the outputs according to the benchmark format
+
+---
+
+## Benchmark Scope
+
+This benchmark focuses on **multi-configuration radiomap prediction** in **U6G / XL-MIMO** systems. The released resources are intended to support controlled study of:
+
+* configuration-aware prediction
+* geometry-aware learning
+* sparse observation settings
+* cross-configuration generalization
+* cross-environment generalization
+
+The website documentation explains how these tasks are defined and how the released data and code are organized to support them.
+
+---
+
+## Documentation Structure
+
+This website is organized into the following sections:
+
+* **Benchmark** — task definitions and evaluation settings
+* **Dataset** — released data assets and folder structure
+* **Pretrained Models** — available checkpoints and task correspondence
+* **Code** — repository structure and script organization
+* **Quickstart** — recommended usage paths for new users
+* **Citation** — how to cite the paper and project resources
 
 ---
 
 ## Citation
 
-Citation information will be added after the paper metadata is finalized.
+If you use this project in your research, please cite:
 
 ```bibtex
 @misc{li2026u6gxlmimoradiomapprediction,
@@ -121,6 +157,9 @@ Citation information will be added after the paper metadata is finalized.
       url={https://arxiv.org/abs/2603.06401}, 
 }
 ```
+
+
+
 
 ---
 
