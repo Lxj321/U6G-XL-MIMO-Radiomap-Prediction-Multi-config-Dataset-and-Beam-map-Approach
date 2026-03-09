@@ -1,22 +1,13 @@
-## Title
-
-**U6G XL-MIMO Radiomap Prediction: Multi-Config Dataset & Beam Map Approach**
-
-## Subtitle
+# U6G XL-MIMO Radiomap Prediction: Multi-Config Dataset & Beam Map Approach
 
 **A public benchmark and reproducibility package for multi-configuration radiomap prediction in U6G / XL-MIMO systems.**
 
-## Intro paragraph
-
 This website serves as the documentation portal for the public release accompanying our paper **“U6G XL-MIMO Radiomap Prediction: Multi-Config Dataset and Beam Map Approach.”** It organizes the released dataset, benchmark definitions, pretrained models, and code for dataset generation, training, and evaluation.
 
-## Quick links / hero buttons
-
-
-* **Paper (arXiv)** https://arxiv.org/abs/2603.06401
-* **Dataset & Pretrained Models (Hugging Face)** https://huggingface.co/datasets/lxj321/Multi-config-Radiomap-Dataset
-* **Code (GitHub)** https://github.com/Lxj321/MulticonfigRadiomapDataset
-* **Documentation (Website)** https://lxj321.github.io/MulticonfigRadiomapDataset/
+- **Paper (arXiv):** https://arxiv.org/abs/2603.06401
+- **Dataset & Pretrained Models (Hugging Face):** https://huggingface.co/datasets/lxj321/Multi-config-Radiomap-Dataset
+- **Code (GitHub):** https://github.com/Lxj321/MulticonfigRadiomapDataset
+- **Documentation (Website):** https://lxj321.github.io/MulticonfigRadiomapDataset/
 
 ---
 
