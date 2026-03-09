@@ -1,15 +1,21 @@
 # Pretrained Models
 
-This page documents the pretrained checkpoints provided in `Pretrained_Model/`.
+This page documents the pretrained checkpoints released under `Pretrained_Model/`.
 
-The repository currently provides pretrained models for:
+The repository provides pretrained models for:
 
 - **GAN-based baselines**
 - **UNet-based baselines**
 
+These checkpoints are intended for:
+
+- evaluation of released benchmark tasks
+- reproduction of reported pretrained results
+- comparison against new baselines under the same benchmark settings
+
 ---
 
-# GAN
+# GAN Checkpoints
 
 GAN checkpoints are organized as:
 
@@ -23,7 +29,7 @@ Pretrained_Model/GAN/<task_id>/
   batch_history.json
 ```
 
-## Files
+## File roles
 
 ### `best_G.pth`
 
@@ -46,13 +52,13 @@ This is mainly provided for:
 
 ### `config.json`
 
-Stores the task configuration used for training/evaluation.
+Stores the task configuration associated with the training run.
 
-This may include settings such as:
+Typical contents may include:
 
 * split strategy
 * input mode
-* sparse/dense mode
+* sparse / dense mode
 * number of samples
 * training hyperparameters
 
@@ -70,9 +76,9 @@ Stores batch-level training history.
 
 ---
 
-## Available GAN Tasks
+## Available GAN tasks
 
-The currently available pretrained GAN tasks are:
+The released pretrained GAN tasks include:
 
 * `beam_dense_encoding`
 * `beam_dense_feature`
@@ -83,18 +89,18 @@ The currently available pretrained GAN tasks are:
 * `scene_dense_encoding`
 * `scene_dense_feature`
 
-These task IDs are aligned with the benchmark naming in `benchmark.md`.
+These task IDs are directly aligned with the benchmark naming defined in the Benchmark page.
 
 ---
 
-## Recommended Usage
+## Recommended GAN usage
 
 For evaluation or inference, users typically only need:
 
 * `best_G.pth`
 * `config.json`
 
-The folder naming directly indicates the benchmark setting, e.g.:
+The folder naming directly indicates the benchmark task, for example:
 
 ```text
 Pretrained_Model/GAN/random_dense_feature/
@@ -110,7 +116,7 @@ This makes it straightforward to map:
 
 ---
 
-# UNet
+# UNet Checkpoints
 
 UNet checkpoints are stored under:
 
@@ -121,13 +127,13 @@ Pretrained_Model/Unet/
   *.csv
 ```
 
-## Files
+## File roles
 
 ### `*.pt`
 
 Serialized UNet checkpoints.
 
-These files contain pretrained model weights for different task settings.
+These files contain pretrained model weights for different released benchmark settings.
 
 ### `*.png`
 
@@ -145,36 +151,79 @@ Summary tables or recorded evaluation results.
 
 ---
 
-## Notes
+## UNet checkpoint usage
 
-UNet checkpoints currently use a different naming style from the GAN task folders.
+Unlike the GAN checkpoints, the released UNet checkpoints are **not** organized by `<task_id>` folder names.
 
-For example, checkpoint names may encode:
-
-* dense vs sparse setting
-* featuremap vs environment input
-* first-stage vs second-stage network
-* random seed
-
-A dedicated mapping table from UNet checkpoint names to benchmark tasks will be provided in a future update.
-
----
-
-# Current Status
-
-* GAN pretrained folders are already organized with **task-aligned naming**
-* UNet checkpoints are available, but their naming will be further standardized
+Instead, they are evaluated through the released UNet evaluation pipeline, which uses a predefined checkpoint list and corresponding benchmark settings.
 
 This means:
 
-* **GAN checkpoints** can already be used directly with the benchmark task names
-* **UNet checkpoints** may require manual mapping based on filename conventions
+* GAN checkpoints follow **task-aligned folder naming**
+* UNet checkpoints follow a **script-aligned checkpoint naming style**
+* both still correspond to the same released benchmark dimensions:
+
+  * random / beam / scene
+  * dense / sparse
+  * feature / encoding
+
+---
+
+## Released UNet model groups
+
+The released UNet evaluation script covers multiple baseline groups, including:
+
+* random-split dense baselines
+* random-split sparse baselines
+* beam-split dense baselines
+* scene-split dense baselines
+* feature-map-based baselines
+* continuous-encoding-based baselines
+
+Representative released checkpoint groups include:
+
+* `Solution1_environment`
+* `Solution1_featuremap`
+* `Solution1_continuous`
+* `Solution2_sparse_featuremap`
+* `Solution2_sparse_continuous`
+* `Solution3_1_beam_featuremap`
+* `Solution3_1_beam_continuous`
+* `Solution3_2_scene_featuremap`
+* `Solution3_2_scene_continuous`
+
+These are evaluated directly by the released UNet evaluation script.
+
+---
+
+## Recommended UNet usage
+
+For most users, the recommended workflow is:
+
+1. place the UNet checkpoints under `Pretrained_Model/Unet/`
+2. run the released evaluation script:
+
+   ```bash
+   python ModelEvaluation_Unet.py
+   ```
+3. use the generated summary tables and visualizations for inspection
+
+In practice, users do not need to manually reconstruct the task mapping for every checkpoint as long as they use the released evaluation script.
+
+---
+
+# Summary of Checkpoint Organization
+
+| Baseline | Checkpoint organization                                  | Recommended usage                       |
+| -------- | -------------------------------------------------------- | --------------------------------------- |
+| GAN      | `Pretrained_Model/GAN/<task_id>/`                        | directly map task → folder → checkpoint |
+| UNet     | `Pretrained_Model/Unet/*.pt` with script-defined mapping | use released UNet evaluation script     |
 
 ---
 
 # Suggested Starting Points
 
-For most users, the following pretrained GAN models are recommended as starting points:
+For first use, the following pretrained GAN models are recommended:
 
 * `random_dense_feature` — standard dense baseline
 * `scene_dense_feature` — cross-environment generalization benchmark
@@ -185,4 +234,21 @@ These provide representative coverage of:
 * standard supervised prediction
 * generalization to unseen scenes
 * sparse observation settings
+
+For UNet baselines, the recommended starting point is to run the released UNet evaluation script directly and inspect the predefined evaluated model groups.
+
+
+
+---
+
+
+## Checkpoint-to-task examples
+
+
+| Baseline | Example checkpoint / folder | Benchmark meaning |
+|---|---|---|
+| GAN | `random_dense_feature/best_G.pth` | random split + dense + feature |
+| GAN | `scene_dense_encoding/best_G.pth` | scene split + dense + encoding |
+| UNet | `Solution2_sparse_featuremap` | sparse + feature |
+| UNet | `Solution3_2_scene_continuous` | scene + dense + continuous |
 
