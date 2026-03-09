@@ -1,11 +1,15 @@
-
 # Quickstart
 
-This page shows how to prepare the dataset and pretrained checkpoints, and how to run the provided evaluation scripts.
+This page provides the fastest way to verify the released benchmark resources. It focuses on **evaluation-first usage**: preparing the dataset and pretrained checkpoints, and then running the provided evaluation scripts for the released UNet and GAN baselines.
+
+If your goal is to:
+- **inspect the released data**, start from the Dataset page
+- **evaluate released checkpoints**, follow this page
+- **retrain models or reproduce the generation pipeline**, refer to the code repository and detailed documentation pages
 
 ---
 
-# 1. Prepare Dataset and Pretrained Weights
+# 1. Prepare dataset and pretrained checkpoints
 
 Place the dataset and pretrained models under the project root as:
 
@@ -24,13 +28,44 @@ Place the dataset and pretrained models under the project root as:
       ...
 ```
 
-The provided scripts assume these default paths.
+The released evaluation scripts assume these default paths.
+
+## Required folders for evaluation
+
+For evaluating pretrained checkpoints, the required folders are:
+
+* `Dataset/radiomaps`
+* `Dataset/height_maps`
+* `Dataset/beam_maps`
+* `Pretrained_Model/Unet`
+* `Pretrained_Model/GAN`
+
+The folder `Dataset/sionna_maps` is optional and is only needed if you want to reproduce the ray-tracing generation pipeline.
 
 ---
 
-# 2. Evaluate Pretrained UNet
+# 2. Recommended first run
 
-The UNet evaluation script uses a built-in configuration class (`EvalConfig`) and does **not** require command-line arguments.
+For a first verification, the recommended order is:
+
+1. run the released UNet evaluation script
+2. run the released GAN evaluation script
+
+This provides a quick sanity check that:
+
+* dataset paths are correct
+* pretrained checkpoints are correctly placed
+* the evaluation pipeline runs end-to-end
+
+---
+
+# 3. Evaluate pretrained UNet checkpoints
+
+Script:
+
+```text
+ModelEvaluation_Unet.py
+```
 
 Run:
 
@@ -38,23 +73,26 @@ Run:
 python ModelEvaluation_Unet.py
 ```
 
+The UNet evaluation script uses a built-in configuration class (`EvalConfig`) and does **not** require command-line arguments.
+
+## Default paths
+
 By default, the script uses:
 
 * `Dataset/radiomaps`
 * `Dataset/height_maps`
 * `Dataset/beam_maps`
+* `Pretrained_Model/Unet`
 
-and evaluates a predefined list of UNet checkpoints under:
-
-* `Pretrained_Model/Unet/`
-
-The script also uses:
+## Default evaluation settings
 
 * `RANDOM_SEED = 42`
 * `TRAIN_RATIO = 0.7`
 * `VAL_RATIO = 0.1`
 * `TEST_RATIO = 0.2`
 * `BATCH_SIZE = 64`
+
+## Outputs
 
 Results are saved to:
 
@@ -68,75 +106,78 @@ Generated outputs include:
 * `metrics_comparison_dB.png`
 * `{model_name}_visualization.png`
 
-> Notes:
->
-> * Metrics are computed in the **dB domain**.
-> * Buildings and invalid regions are excluded.
-> * SSIM is computed only on valid regions.
+## Notes
+
+* metrics are computed in the **dB domain**
+* building regions and invalid regions are excluded
+* SSIM is computed only on valid regions
+
+## If you want to change settings
+
+`ModelEvaluation_Unet.py` evaluates a predefined model list from `EvalConfig.MODELS`.
+
+To change:
+
+* evaluated checkpoints
+* dataset paths
+* split strategy
+* batch size
+* model list
+
+please edit the corresponding fields in `EvalConfig`.
 
 ---
 
-# 3. Evaluate Pretrained GAN
+# 4. Evaluate pretrained GAN checkpoints
 
-The GAN evaluation script is currently provided in a **Jupyter / notebook-style** format.
-
-Its default paths are:
-
-* `Dataset/radiomaps`
-* `Dataset/height_maps`
-* `Dataset/beam_maps`
-
-and the experiment directory is:
+Script:
 
 ```text
-Pretrained_Model/GAN
+ModelEvaluation_GAN.py
 ```
 
-## Option A: Run as a Python script
-
-Because the file ends with a direct call to:
-
-```python
-run_evaluation()
-```
-
-you can run:
+Run:
 
 ```bash
 python ModelEvaluation_GAN.py
 ```
 
-This will evaluate all discovered GAN experiments under:
+The GAN evaluation script automatically scans the experiment folders under:
 
 ```text
 Pretrained_Model/GAN/
 ```
 
-and save summary files such as:
+and evaluates discovered experiments containing:
+
+```text
+best_G.pth
+```
+
+## Default paths
+
+By default, the script uses:
+
+* `Dataset/radiomaps`
+* `Dataset/height_maps`
+* `Dataset/beam_maps`
+* `Pretrained_Model/GAN`
+
+## Outputs
+
+Typical outputs include:
 
 * `Pretrained_Model/GAN/evaluation_summary.json`
 * `Pretrained_Model/GAN/evaluation_summary.csv`
 
-## Option B: Use in Jupyter Notebook
+Per-experiment files may also include:
 
-You can also copy the script into a notebook cell and run:
+* `eval_results.json`
+* `eval_visualization.png`
 
-```python
-results = run_evaluation()
-```
+## Supported released task folders
 
-Useful variants:
-
-```python
-results = run_evaluation(single='random_dense_feature')
-results = run_evaluation(visualize=True)
-```
-
----
-
-# 4. Supported GAN Tasks
-
-The GAN evaluator is aligned with the following task folders:
+The released GAN evaluator is aligned with task folders such as:
 
 * `beam_dense_encoding`
 * `beam_dense_feature`
@@ -147,42 +188,29 @@ The GAN evaluator is aligned with the following task folders:
 * `scene_dense_encoding`
 * `scene_dense_feature`
 
-These are automatically detected from subfolders containing `best_G.pth`.
+These are automatically detected from experiment folders containing `best_G.pth`.
 
----
+## Configuration inference
 
-# 5. Important Notes
-
-## UNet script behavior
-
-`ModelEvaluation_Unet.py` evaluates a predefined model list from `EvalConfig.MODELS`.
-
-If you want to:
-
-* evaluate only one checkpoint
-* change paths
-* change split strategy
-* add/remove models
-
-please edit the corresponding entries in `EvalConfig`.
-
-## GAN script behavior
-
-`ModelEvaluation_GAN.py` automatically scans `Pretrained_Model/GAN/` and evaluates experiment folders that contain:
-
-```text
-best_G.pth
-```
-
-It infers task settings from either:
+The script infers task settings from one of the following sources:
 
 * predefined `EXPERIMENT_CONFIGS`
 * `config.json`
-* or folder naming rules
+* experiment folder naming rules
+
+## Optional notebook-style usage
+
+The script can also be used interactively. For example:
+
+```python
+results = run_evaluation()
+results = run_evaluation(single='random_dense_feature')
+results = run_evaluation(visualize=True)
+```
 
 ---
 
-# 6. Common Issues
+# 5. Common issues
 
 ## File not found
 
@@ -206,7 +234,7 @@ If you need another GPU, modify this value in the script.
 
 ## Missing Python packages
 
-The scripts require packages such as:
+The evaluation scripts require packages such as:
 
 * `torch`
 * `numpy`
@@ -214,21 +242,32 @@ The scripts require packages such as:
 * `pandas`
 * `scikit-image`
 
-The UNet script also imports:
+The UNet evaluation script also imports:
 
 * `seaborn`
 
 ---
 
-# 7. Recommended First Run
+# 6. What this quickstart covers
 
-For a first verification, it is recommended to:
+This page focuses on **evaluation of released checkpoints**.
 
-* run `python ModelEvaluation_Unet.py` to evaluate the predefined UNet checkpoints
-* run `python ModelEvaluation_GAN.py` to evaluate all GAN experiment folders
+It does **not** cover in detail:
 
-This provides a quick sanity check that:
+* retraining the GAN or UNet baselines
+* regenerating the dataset assets
+* reproducing the complete ray-tracing pipeline
 
-* dataset paths are correct
-* pretrained checkpoints are correctly placed
-* the evaluation pipeline runs end-to-end
+For those workflows, please refer to the repository scripts and the other documentation pages.
+
+
+
+---
+**Download order**
+
+- download dataset
+- download pretrained models
+- run UNet evaluation
+- run GAN evaluation
+
+
