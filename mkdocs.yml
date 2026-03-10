@@ -11,6 +11,11 @@ theme:
     - content.code.copy
     - toc.follow
 
+extra:
+  analytics:
+    provider: google
+    property: G-H4ZEKY8ZDP
+
 nav:
   - Home: index.md
   - Dataset: dataset.md
@@ -26,3 +31,5 @@ markdown_extensions:
       permalink: true
   - pymdownx.superfences
   - pymdownx.details
+
+
