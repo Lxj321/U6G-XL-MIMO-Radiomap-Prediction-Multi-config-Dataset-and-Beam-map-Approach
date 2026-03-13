@@ -9,6 +9,12 @@ This website serves as the documentation portal for the public release accompany
 - **Code (GitHub):** https://github.com/Lxj321/MulticonfigRadiomapDataset
 - **Documentation (Website):** https://lxj321.github.io/MulticonfigRadiomapDataset/
 
+## Visual Example
+
+Representative ray-tracing radiomap example from the released multi-configuration dataset.
+
+![Radiomap Example](assets/dataset/radiomap_example.png)
+
 ---
 
 ## Overview
