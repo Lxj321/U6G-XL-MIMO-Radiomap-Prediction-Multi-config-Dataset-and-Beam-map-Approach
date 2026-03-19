@@ -437,5 +437,5 @@ In particular:
 
 * the **building region** is identified from the labeled radiomap value `1000`
 * the **invalid / no-label region** is identified from the default floor value `-300`
-* only valid propagation regions are used as effective supervision targets in downstream preprocessing
+* only valid propagation regions are used as effective supervision targets in downstream preprocessing.
 
